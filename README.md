@@ -1,7 +1,7 @@
 # SimpleCamera
 
 A simple camera unit for Ultibo using pure OMX calls
-v.0.11 alpha - 20181202
+v. 0.13 alpha - 20181220
 
 Working alpha code
 
@@ -9,9 +9,9 @@ based on https://github.com/SonienTaegi/rpi-omx-tutorial
 
 Instructions:
 
-(1) call initcamera with your desired parameters
-
-check the result: if it is >$C0000000 then all went OK, the camera is in the idle state, and the result is the address of the main camera buffer
+(1) provide a buffer for the camera
+(2) call initcamera with your desired parameters: xres, yres, fps and your buffer address
+(3) check the result: if it is >$C0000000 then all went OK, the camera is in the idle state, and the result is the address of the main OMX camera buffer
 
 If it is small integer, an error occured
 
@@ -24,13 +24,12 @@ If it is small integer, an error occured
 
 If all went OK, you will get pointers to y, u, v buffers in pY, pU, pV and their sizes in sizey, sizeu, sizev
 
-(2) call startcamera. If it returned 0, the worker thread is started
+(4) call startcamera. If it returned 0, the worker thread is started
 
-In your main thread wait until filled=true and read the buffers as fast as you can, then set filled=false
-If there is no filled=false set by the receiving thread, the camera worked thread will stop itself in one second
+In your main thread wait until filled=true. You have a frame in your buffer.
 
-(3) when done, call stopcamera
+(5) when done, call stopcamera
 
-(4) after this you can start it again or...
-(5) call destroycamera which will unload it and close omx.
+(6) after this you can start it again or...
+(7) call destroycamera which will unload it and close omx.
 

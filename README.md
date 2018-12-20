@@ -10,7 +10,9 @@ based on https://github.com/SonienTaegi/rpi-omx-tutorial
 Instructions:
 
 (1) provide a buffer for the camera
+
 (2) call initcamera with your desired parameters: xres, yres, fps and your buffer address
+
 (3) check the result: if it is >$C0000000 then all went OK, the camera is in the idle state, and the result is the address of the main OMX camera buffer
 
 If it is small integer, an error occured
@@ -22,8 +24,6 @@ If it is small integer, an error occured
    5 - error while allocating the camera buffer
    6 - camera didn't reached the idle state
 
-If all went OK, you will get pointers to y, u, v buffers in pY, pU, pV and their sizes in sizey, sizeu, sizev
-
 (4) call startcamera. If it returned 0, the worker thread is started
 
 In your main thread wait until filled=true. You have a frame in your buffer.
@@ -31,5 +31,6 @@ In your main thread wait until filled=true. You have a frame in your buffer.
 (5) when done, call stopcamera
 
 (6) after this you can start it again or...
+
 (7) call destroycamera which will unload it and close omx.
 

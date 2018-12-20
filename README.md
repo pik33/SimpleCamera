@@ -26,7 +26,7 @@ If it is small integer, an error occured
 
 (4) call startcamera. If it returned 0, the worker thread is started
 
-In your main thread wait until filled=true. You have a frame in your buffer.
+In your main thread wait until filled=true. You have a frame in your buffer. Set filled to false again.
 
 (5) when done, call stopcamera
 
